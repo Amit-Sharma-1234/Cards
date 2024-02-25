@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Card</title>
+    <style>
+      #root {
+        font-family: sans-serif;
+        max-width: 1250px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 auto;
+      }
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        width: 300px;
+        margin: 35px;
+
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: all 0.6s;
+        cursor: pointer;
+      }
+      .card:hover {
+        scale: 1.1;
+      }
+
+      .card img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      .name {
+        font-size: 19px;
+        font-weight: 600;
+        margin-bottom: 11px;
+      }
+      .designation {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      const root = document.getElementById("root");
+
+      const imageData = [
+        {
+          image:
+            "https://media.istockphoto.com/id/693275072/photo/the-next-best-triumph-could-be-around-the-corner.webp?b=1&s=170667a&w=0&k=20&c=huDAtVrgFXyWgXmdMbNHct2wu7zyQRNDWD2iPHFO05w=",
+          name: "John Doe",
+          designation: "Software Engineer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1059661424/photo/mature-mixed-race-business-man.webp?b=1&s=170667a&w=0&k=20&c=R_VTz55PRxV2NCqj2j9LPKOP8CMMkKHKStaRr52shdU=",
+          name: "Alice Smith",
+          designation: "Business Analyst",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1160730376/photo/its-a-good-day-to-make-some-smart-connections.webp?b=1&s=170667a&w=0&k=20&c=J-YL9B6Myn66zGkoa-3L7pa3hFUkGLzYPRoUU5lsqUQ=",
+          name: "Michael Johnson",
+          designation: "Project Manager",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1322913815/photo/young-bearded-businessman-sitting-on-desk-and-posing.webp?b=1&s=170667a&w=0&k=20&c=v8XiUc-TUyBORZD75IRq9ryYERh-oxGBspSz4fKGQtE=",
+          name: "Emily Wilson",
+          designation: "Marketing Coordinator",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1326920136/photo/shot-of-a-business-women-using-laptop-working-at-home-stock-photo.webp?b=1&s=170667a&w=0&k=20&c=q3gWpyv-r32NtRWufkZN6nURMYq6tjVrQLDBDwmdVyo=",
+          name: "David Brown",
+          designation: "Financial Advisor",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1159560350/photo/young-businesswoman.webp?b=1&s=170667a&w=0&k=20&c=LQOMhpcSMGgbYj7t83BRK9xU3fjlA0Dk3fiC4Euxdew=",
+          name: "Sophia Martinez",
+          designation: "HR Manager",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/637924268/photo/businessman-looking-across-table-in-office-meeting.webp?b=1&s=170667a&w=0&k=20&c=ZO13tE9XRNcq1r9SNGVBGtv9NNeUdAsmp6W2tnEl1Vo=",
+          name: "Daniel Lee",
+          designation: "Graphic Designer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/172170753/photo/construction-engineer-measurement.webp?b=1&s=170667a&w=0&k=20&c=aJVKLhxs7XFHvpokd7wxmVZrvsS-mXJ9TvITyzSQP0s=",
+          name: "Olivia Davis",
+          designation: "Civil Engineer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1310814041/photo/portrait-of-a-businesswoman-standing-in-a-a-modern-office.webp?b=1&s=170667a&w=0&k=20&c=JlZ6tLnEEYDd99lztOVFzfES3FYSG0g4kco5YiIND2Y=",
+          name: "William Wilson",
+          designation: "Sales Manager",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1181196036/photo/confident-smiling-indian-young-woman-professional-student-customer-saleswoman-looking-at.webp?b=1&s=170667a&w=0&k=20&c=i_ov372C_5AwE-EytHLtPQuw9xaz4pJ2tMepIrW4ODg=",
+          name: "Isabella Taylor",
+          designation: "Customer Support",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1398994132/photo/happy-businesswoman-using-a-digital-tablet-young-leading-businesswoman-using-a-wireless.webp?b=1&s=170667a&w=0&k=20&c=z-tvJG0r-SNUrIGwZb7YjLI9f_cOnkN30vcPafskrkQ=",
+          name: "Jackson Miller",
+          designation: "Digital Marketer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1160730376/photo/its-a-good-day-to-make-some-smart-connections.webp?b=1&s=170667a&w=0&k=20&c=J-YL9B6Myn66zGkoa-3L7pa3hFUkGLzYPRoUU5lsqUQ=",
+          name: "Sophie Moore",
+          designation: "Content Writer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1303501167/photo/portrait-of-a-happy-asian-businesswoman.webp?b=1&s=170667a&w=0&k=20&c=MDu6j6t3_CKzk8RcgOxrX8BsREReGIcI3jsGqpjCRHU=",
+          name: "Ethan Anderson",
+          designation: "Software Developer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1424988699/photo/businessman-contemplating-in-the-office-looking-through-the-window.webp?b=1&s=170667a&w=0&k=20&c=jlF3Ihf5kO3-6dWUGhj8WTuB1Z2tiACre770YowcMTA=",
+          name: "Alice",
+          designation: "Engineer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1286023691/photo/modern-businesswoman-using-tablet.webp?b=1&s=170667a&w=0&k=20&c=LNrMx0jB3z676AHDXJtxKN8e6omAVFi8GdAv6SR-u-A=",
+          name: "Bob",
+          designation: "Manager",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/637233964/photo/all-set-for-a-productive-night-ahead.webp?b=1&s=170667a&w=0&k=20&c=Wi1FBamADMoM9SPvotkB9UGmmDDx8atZmkDKMx0i0sw=",
+          name: "Charlie",
+          designation: "Doctor",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1388649939/photo/cheerful-caucasian-young-man-student-freelancer-using-digital-tablet-for-social-media-e.webp?b=1&s=170667a&w=0&k=20&c=aYt4qc_eHiElD5igQvgLMVMd8mcFBcUTXf24TmCjF90=",
+          name: "David",
+          designation: "Lawyer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1171169099/photo/man-with-crossed-arms-isolated-on-gray-background.webp?b=1&s=170667a&w=0&k=20&c=W5AFEjtmFjyyIGF40oSTOm6E0rj7AjF_zIIF-0zdVxk=",
+          name: "Emily",
+          designation: "Architect",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1292012984/photo/portrait-female-doctor-stock-photo.webp?b=1&s=170667a&w=0&k=20&c=Ahm66Om9qIikibqZ17Cn857dhF8JSvbbbeoP3P8cpRw=",
+          name: "Frank",
+          designation: "Developer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/671290874/photo/portrait-of-a-female-doctor.webp?b=1&s=170667a&w=0&k=20&c=xq9dTuHur5oQiRnYIQqCtw4w9aIO9A8sjDI5jzgxCh0=",
+          name: "Grace",
+          designation: "Consultant",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1270790502/photo/medical-concept-of-indian-beautiful-female-doctor-with-note-book.webp?b=1&s=170667a&w=0&k=20&c=1SeKJzjB9loT2tW4wzxQ5S-iNMz31-iarSLka2j1hyw=",
+          name: "Harry",
+          designation: "Engineer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1199745866/photo/portrait-of-a-cheerful-doctor-in-modern-office.webp?b=1&s=170667a&w=0&k=20&c=6e_BxYK_VKeD3YaLDKw3qoDqUoR2KPk6ZGQxLQ8a36U=",
+          name: "Isabel",
+          designation: "Manager",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1140837585/photo/young-controler.webp?b=1&s=170667a&w=0&k=20&c=HoxwzZn2mPTJwuQI1kguCjM9D0bKlHaYX55mxjQAojY=",
+          name: "John",
+          designation: "Doctor",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1214111410/photo/in-technology-research-facility-chief-engineer-stands-in-the-middle-of-the-lab-and-uses.webp?b=1&s=170667a&w=0&k=20&c=fr10S-xlo5QZNETs3s1Rf-k3pPPXp99hRwGXQKMkNGE=",
+          name: "Kelly",
+          designation: "Lawyer",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/id/1038364390/photo/portrait-of-young-beautiful-engineer-woman-working-in-factory-building.webp?b=1&s=170667a&w=0&k=20&c=hEFYz4xNC9ZCDOosCL1GlxZfoHdsN6hvvqj1uVLuzqM=",
+          name: "Liam",
+          designation: "Architect",
+        },
+      ];
+
+      imageData.forEach((val) => {
+        const card = document.createElement("div");
+        card.setAttribute("class", "card");
+        root.append(card);
+        const img = document.createElement("img");
+        img.setAttribute("src", val.image);
+        card.append(img);
+        const name = document.createElement("div");
+        name.innerHTML = val.name;
+        name.setAttribute("class", "name");
+        card.append(name);
+        const designation = document.createElement("div");
+        designation.innerHTML = val.designation;
+        designation.setAttribute("class", "designation");
+        card.append(designation);
+      });
+    </script>
+  </body>
+</html>
